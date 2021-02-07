@@ -35,7 +35,7 @@ public class caneAdminCommand implements CommandExecutor {
                     if (option.equalsIgnoreCase("reset")) {
                         Player target = Bukkit.getPlayer(playerIGN);
                         if (target == null) {
-                            player.sendMessage(stringUtil.translateMessage("&c&l" + target + " &c not found!"));
+                            player.sendMessage(stringUtil.translateMessage("&c&lPlayer is not found"));
                         } else {
                             caneDataController caneDataController = new caneDataController();
                             caneDataController.setCaneAmount(target.getUniqueId(), 0);
@@ -54,7 +54,7 @@ public class caneAdminCommand implements CommandExecutor {
                     if(option.equalsIgnoreCase("set")){
                         Player target = Bukkit.getPlayer(playerIGN);
                         if (target == null) {
-                            player.sendMessage(stringUtil.translateMessage("&c&l" + target + " &c not found!"));
+                            player.sendMessage(stringUtil.translateMessage("&c&lPlayer is not found"));
                         } else {
                             caneDataController.setCaneAmount(target.getUniqueId(), amount);
                             player.sendMessage(stringUtil.translateMessage("&a" + target.getDisplayName() + "&7's has been set to &2&l" + args[2]));
@@ -68,9 +68,9 @@ public class caneAdminCommand implements CommandExecutor {
                     Player target = Bukkit.getPlayer(args[0]);
                     caneDataController caneDataController = new caneDataController();
                     if (target == null) {
-                        player.sendMessage(stringUtil.translateMessage("&c&l" + target + " &c not found!"));
+                        player.sendMessage(stringUtil.translateMessage("&c&lPlayer is not found"));
                     } else {
-                        player.sendMessage(stringUtil.translateMessage("&c&l" + target.getDisplayName() + "&7 has mined " + caneDataController.getCaneAmount(target.getUniqueId())));
+                        player.sendMessage(stringUtil.translateMessage("&c&l" + target.getDisplayName() + "&7 has mined &a&l" + caneDataController.getCaneAmount(target.getUniqueId())) + "&7sugarcane");
                     }
 
                 }
