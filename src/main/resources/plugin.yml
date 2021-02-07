@@ -1,0 +1,12 @@
+name: CaneTop
+version: ${project.version}
+main: me.bcof.canetop.CaneTop
+api-version: 1.16
+authors: [ Bcof ]
+description: A cane counter for your server
+commands:
+  canetop:
+    description: Shows you the leaderboard for everyone
+  cane:
+    description: The admin commands for cane top
+    permission: canetop.admin
