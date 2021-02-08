@@ -10,3 +10,4 @@ commands:
   cane:
     description: The admin commands for cane top
     permission: canetop.admin
+

@@ -39,7 +39,7 @@ public class caneAdminCommand implements CommandExecutor {
                         } else {
                             caneDataController caneDataController = new caneDataController();
                             caneDataController.setCaneAmount(target.getUniqueId(), 0);
-                            player.sendMessage(stringUtil.translateMessage("&a" + target.getDisplayName() + "'s cane amount has been reset"));
+                            player.sendMessage(stringUtil.translateMessage("&a&l" + target.getDisplayName() + "&7's cane amount has been reset"));
                         }
                     }
 
@@ -57,11 +57,9 @@ public class caneAdminCommand implements CommandExecutor {
                             player.sendMessage(stringUtil.translateMessage("&c&lPlayer is not found"));
                         } else {
                             caneDataController.setCaneAmount(target.getUniqueId(), amount);
-                            player.sendMessage(stringUtil.translateMessage("&a" + target.getDisplayName() + "&7's has been set to &2&l" + args[2]));
+                            player.sendMessage(stringUtil.translateMessage("&a" + target.getDisplayName() + "&7's sugarcane has been set to &2&l" + args[2]));
                         }
-
                     }
-
                 }
 
                 if(args.length == 1){
@@ -70,14 +68,10 @@ public class caneAdminCommand implements CommandExecutor {
                     if (target == null) {
                         player.sendMessage(stringUtil.translateMessage("&c&lPlayer is not found"));
                     } else {
-                        player.sendMessage(stringUtil.translateMessage("&c&l" + target.getDisplayName() + "&7 has mined &a&l" + caneDataController.getCaneAmount(target.getUniqueId())) + "&7sugarcane");
+                        player.sendMessage(stringUtil.translateMessage("&c&l" + target.getDisplayName() + "&7 has mined &a&l" + caneDataController.getCaneAmount(target.getUniqueId())+ " &7sugarcane"));
                     }
-
                 }
             }
-
-
-
         }
         return false;
     }

@@ -7,8 +7,8 @@ import java.util.*;
 import java.util.stream.Collectors;
 
 public class caneDataController {
-    configHandler configHandler = new configHandler();
     FileConfiguration file;
+    configHandler configHandler;
     private HashMap<UUID, Integer> playerDataCache = new HashMap<>();
 
 
@@ -38,6 +38,7 @@ public class caneDataController {
             ConfigurationSection section = file.getConfigurationSection(uuid.toString());
             section.set("cane-number", number);
             configHandler.saveCaneConfig();
+            configHandler.reloadCaneConfig();
         }
     }
 

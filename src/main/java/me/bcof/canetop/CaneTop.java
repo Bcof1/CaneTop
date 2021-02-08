@@ -2,6 +2,7 @@ package me.bcof.canetop;
 
 import me.bcof.canetop.commands.caneAdminCommand;
 import me.bcof.canetop.commands.caneLeaderboardCommand;
+import me.bcof.canetop.events.blockBrokeEvent;
 import me.bcof.canetop.events.loginSession;
 import org.bukkit.plugin.java.JavaPlugin;
 import me.bcof.canetop.dataManager.configHandler;
@@ -16,12 +17,8 @@ public final class CaneTop extends JavaPlugin {
         getCommand("cane").setExecutor(new caneAdminCommand());
 
         getServer().getPluginManager().registerEvents(new loginSession(), this);
+        getServer().getPluginManager().registerEvents(new blockBrokeEvent(), this);
         loadConfigHandler();
-        System.out.println(" ");
-        System.out.println("Loaded commands, events and config");
-        System.out.println(" ");
-
-
     }
 
     @Override
