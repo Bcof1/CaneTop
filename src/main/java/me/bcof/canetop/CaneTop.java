@@ -2,6 +2,7 @@ package me.bcof.canetop;
 
 import me.bcof.canetop.commands.CaneAdminCommand;
 import me.bcof.canetop.commands.CaneLeaderboardCommand;
+import me.bcof.canetop.events.BlockPlaceEvent;
 import me.bcof.canetop.events.MenuListener;
 import me.bcof.canetop.events.BlockBrokeEvent;
 import me.bcof.canetop.events.LoginSession;
@@ -25,6 +26,7 @@ public final class CaneTop extends JavaPlugin {
         getServer().getPluginManager().registerEvents(new LoginSession(), this);
         getServer().getPluginManager().registerEvents(new BlockBrokeEvent(), this);
         getServer().getPluginManager().registerEvents(new MenuListener(), this);
+        getServer().getPluginManager().registerEvents(new BlockPlaceEvent(), this);
         loadConfigHandler();
     }
 
