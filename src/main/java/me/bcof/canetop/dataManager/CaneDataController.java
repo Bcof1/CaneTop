@@ -51,7 +51,15 @@ public class CaneDataController {
         }else{
             createData(uuid, 0);
         }
+    }
 
+    public boolean doesUserExist(UUID uuid){
+        file = configHandler.getCaneConfig();
+        if(file.getConfigurationSection(uuid.toString()) == null){
+            return false;
+        }else{
+            return true;
+        }
     }
 
     public HashMap<String, Integer> sortLeaderboard(){
@@ -66,14 +74,11 @@ public class CaneDataController {
 
         HashMap<String, Integer> sortedHashMap = new LinkedHashMap<>();
 
-
         values.entrySet().stream()
                 .sorted((k1, k2) -> -k1.getValue().compareTo(k2.getValue()))
                 .forEach(k -> sortedHashMap.put(k.getKey(), k.getValue()));
 
 
-        System.out.println(sortedHashMap);
-        
         return sortedHashMap;
     }
 }

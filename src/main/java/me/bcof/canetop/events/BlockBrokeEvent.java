@@ -14,6 +14,7 @@ public class BlockBrokeEvent implements Listener {
     @EventHandler
     public void onBlockBreak(BlockBreakEvent event){
         int sugarcane = 0;
+
         for (int y = event.getBlock().getY(); y != 255 ; y++) {
             Location sugarCaneAttached = new Location(event.getBlock().getWorld(), event.getBlock().getX(), y, event.getBlock().getZ());
             Material block = sugarCaneAttached.getBlock().getType();

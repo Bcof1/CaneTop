@@ -30,13 +30,13 @@ public class CaneAdminCommand implements CommandExecutor {
                 if(args.length == 2) {
                     String option = args[0];
                     String playerIGN = args[1];
+                    CaneDataController caneDataController = new CaneDataController();
 
                     if (option.equalsIgnoreCase("reset")) {
                         OfflinePlayer target = Bukkit.getOfflinePlayer(playerIGN);
-                        if (target == null) {
+                        if (!caneDataController.doesUserExist(target.getUniqueId())) {
                             player.sendMessage(StringUtil.translateMessage("&c&lPlayer is not found"));
                         } else {
-                            CaneDataController caneDataController = new CaneDataController();
                             caneDataController.setCaneAmount(target.getUniqueId(), 0);
                             player.sendMessage(StringUtil.translateMessage("&a&l" + target.getName() + "&7's cane amount has been reset"));
                         }
@@ -52,7 +52,7 @@ public class CaneAdminCommand implements CommandExecutor {
 
                     if(option.equalsIgnoreCase("set")){
                         OfflinePlayer target = Bukkit.getOfflinePlayer(playerIGN);
-                        if (target == null) {
+                        if (!caneDataController.doesUserExist(target.getUniqueId())) {
                             player.sendMessage(StringUtil.translateMessage("&c&lPlayer is not found"));
                         } else {
                             caneDataController.setCaneAmount(target.getUniqueId(), amount);
@@ -71,8 +71,8 @@ public class CaneAdminCommand implements CommandExecutor {
                     }else{
                         OfflinePlayer target = Bukkit.getOfflinePlayer(args[0]);
                         CaneDataController caneDataController = new CaneDataController();
-                        if (target == null) {
-                            player.sendMessage(StringUtil.translateMessage("&c&lPlayer is not found"));
+                        if (!caneDataController.doesUserExist(target.getUniqueId())) {
+                            player.sendMessage(StringUtil.translateMessage("&c&lPlayer does not exist"));
                         } else {
                             player.sendMessage(StringUtil.translateMessage("&c&l" + target.getName() + "&7 has mined &a&l" + caneDataController.getCaneAmount(target.getUniqueId()) + " &7sugarcane"));
                         }

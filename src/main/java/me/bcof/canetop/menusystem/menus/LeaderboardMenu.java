@@ -84,47 +84,47 @@ public class LeaderboardMenu extends Menu {
 
         if(count == 2){
             setItemData(playerData, key, player, playerItem, "2nd");
-            inventory.setItem(13, playerItem);
+            inventory.setItem(12, playerItem);
         }
 
         if(count == 3){
             setItemData(playerData, key, player, playerItem, "3rd");
-            inventory.setItem(15, playerItem);
+            inventory.setItem(14, playerItem);
         }
 
         if(count == 4){
             setItemData(playerData, key, player, playerItem, "4th");
-            inventory.setItem(21, playerItem);
+            inventory.setItem(20, playerItem);
         }
 
         if(count == 5){
             setItemData(playerData, key, player, playerItem, "5th");
-            inventory.setItem(23, playerItem);
+            inventory.setItem(22, playerItem);
         }
 
         if(count == 6){
             setItemData(playerData, key, player, playerItem, "6th");
-            inventory.setItem(25, playerItem);
+            inventory.setItem(24, playerItem);
         }
 
         if(count == 7){
             setItemData(playerData, key, player, playerItem, "7th");
-            inventory.setItem(29, playerItem);
+            inventory.setItem(28, playerItem);
         }
 
         if(count == 8){
             setItemData(playerData, key, player, playerItem, "8th");
-            inventory.setItem(31, playerItem);
+            inventory.setItem(30, playerItem);
         }
 
         if(count == 9){
             setItemData(playerData, key, player, playerItem, "9th");
-            inventory.setItem(33, playerItem);
+            inventory.setItem(32, playerItem);
         }
 
         if(count == 10){
             setItemData(playerData, key, player, playerItem, "10th");
-            inventory.setItem(15, playerItem);
+            inventory.setItem(34, playerItem);
         }
 
     }
