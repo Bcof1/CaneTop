@@ -47,7 +47,7 @@ public class CaneAdminCommand implements CommandExecutor {
                 if(args.length == 3){
                     String option = args[0];
                     String playerIGN = args[1];
-                    int amount = Integer.parseInt(args[2]);
+                    long amount = Long.parseLong(args[2]);
                     CaneDataController caneDataController = new CaneDataController();
 
                     if(option.equalsIgnoreCase("set")){

@@ -36,7 +36,7 @@ public class LeaderboardMenu extends Menu {
     @Override
     public void setMenuItems() {
         CaneDataController caneDataController = new CaneDataController();
-        HashMap<String, Integer> playerData = caneDataController.sortLeaderboard();
+        HashMap<String, Long> playerData = caneDataController.sortLeaderboard();
         setFillerGlass();
 
         int count = 1;
@@ -57,7 +57,7 @@ public class LeaderboardMenu extends Menu {
         }
     }
 
-    private void setItemData(HashMap<String, Integer> playerData, String key, OfflinePlayer player, ItemStack playerItem, String position) {
+    private void setItemData(HashMap<String, Long> playerData, String key, OfflinePlayer player, ItemStack playerItem, String position) {
         SkullMeta itemMeta = (SkullMeta) playerItem.getItemMeta();
         if(itemMeta.getLore() == null){
             List<String> lores = new ArrayList<>();
@@ -76,7 +76,7 @@ public class LeaderboardMenu extends Menu {
         }
     }
 
-    private void setItemPositions(HashMap<String, Integer> playerData, String key, OfflinePlayer player, ItemStack playerItem, int count){
+    private void setItemPositions(HashMap<String, Long> playerData, String key, OfflinePlayer player, ItemStack playerItem, int count){
         if(count == 1){
             setItemData(playerData, key, player, playerItem, "1st");
             inventory.setItem(4, playerItem);

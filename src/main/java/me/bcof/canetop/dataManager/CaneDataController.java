@@ -6,12 +6,12 @@ import org.bukkit.configuration.file.FileConfiguration;
 import java.util.*;
 
 public class CaneDataController {
-    FileConfiguration file;
-    ConfigHandler configHandler;
-    private HashMap<UUID, Integer> playerDataCache = new HashMap<>();
+    private FileConfiguration file;
+    private ConfigHandler configHandler;
 
 
-    public void createData(UUID uuid, int cane) {
+
+    public void createData(UUID uuid, long cane) {
         file = configHandler.getCaneConfig();
         if (file.getConfigurationSection(uuid.toString()) == null) {
             file.createSection(uuid.toString());
@@ -21,17 +21,17 @@ public class CaneDataController {
         }
     }
 
-    public int getCaneAmount(UUID uuid) {
+    public long getCaneAmount(UUID uuid) {
         file = configHandler.getCaneConfig();
         if (file.getConfigurationSection(uuid.toString()) != null) {
             ConfigurationSection section = file.getConfigurationSection(uuid.toString());
-            return section.getInt("cane-number");
+            return section.getLong("cane-number");
         }
         return 0;
     }
 
 
-    public void setCaneAmount(UUID uuid, int number) {
+    public void setCaneAmount(UUID uuid, long number) {
         file = configHandler.getCaneConfig();
         if (file.getConfigurationSection(uuid.toString()) != null) {
             ConfigurationSection section = file.getConfigurationSection(uuid.toString());
@@ -45,8 +45,8 @@ public class CaneDataController {
         file = configHandler.getCaneConfig();
         if (file.getConfigurationSection(uuid.toString()) != null) {
             ConfigurationSection section = file.getConfigurationSection(uuid.toString());
-            int amount = section.getInt("cane-number");
-            playerDataCache.put(uuid, amount);
+            long amount = section.getLong("cane-number");
+
             configHandler.saveCaneConfig();
         }else{
             createData(uuid, 0);
@@ -62,17 +62,17 @@ public class CaneDataController {
         }
     }
 
-    public HashMap<String, Integer> sortLeaderboard(){
+    public HashMap<String, Long> sortLeaderboard(){
         file = configHandler.getCaneConfig();
-        HashMap<String, Integer> values = new HashMap<>();
+        HashMap<String, Long> values = new HashMap<>();
 
         for (String player : file.getKeys(false)){
             ConfigurationSection section = file.getConfigurationSection(player);
-            int amount = section.getInt("cane-number");
+            long amount = section.getLong("cane-number");
             values.put(player, amount);
         }
 
-        HashMap<String, Integer> sortedHashMap = new LinkedHashMap<>();
+        HashMap<String, Long> sortedHashMap = new LinkedHashMap<>();
 
         values.entrySet().stream()
                 .sorted((k1, k2) -> -k1.getValue().compareTo(k2.getValue()))

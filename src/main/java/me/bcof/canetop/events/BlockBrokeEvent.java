@@ -13,7 +13,7 @@ public class BlockBrokeEvent implements Listener {
     // adds up all of the mined sugarcane, even if only the bottom block is physically mined.
     @EventHandler
     public void onBlockBreak(BlockBreakEvent event){
-        int sugarcane = 0;
+        long sugarcane = 0;
 
         for (int y = event.getBlock().getY(); y != 255 ; y++) {
             Location sugarCaneAttached = new Location(event.getBlock().getWorld(), event.getBlock().getX(), y, event.getBlock().getZ());
