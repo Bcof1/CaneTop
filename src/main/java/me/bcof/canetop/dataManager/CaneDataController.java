@@ -4,11 +4,10 @@ import org.bukkit.configuration.ConfigurationSection;
 import org.bukkit.configuration.file.FileConfiguration;
 
 import java.util.*;
-import java.util.stream.Collectors;
 
-public class caneDataController {
+public class CaneDataController {
     FileConfiguration file;
-    configHandler configHandler;
+    ConfigHandler configHandler;
     private HashMap<UUID, Integer> playerDataCache = new HashMap<>();
 
 
@@ -55,7 +54,7 @@ public class caneDataController {
 
     }
 
-    public LinkedHashMap<String, Integer> sortLeaderboard(){
+    public HashMap<String, Integer> sortLeaderboard(){
         file = configHandler.getCaneConfig();
         HashMap<String, Integer> values = new HashMap<>();
 
@@ -65,14 +64,17 @@ public class caneDataController {
             values.put(player, amount);
         }
 
-        LinkedHashMap<String, Integer> finalSortedHashMap = new LinkedHashMap<>();
-        values.entrySet().stream()
-                .sorted(Map.Entry.comparingByValue())
-                .forEach(k -> finalSortedHashMap.put(k.getKey(), k.getValue()));
+        HashMap<String, Integer> sortedHashMap = new LinkedHashMap<>();
 
-        System.out.println(finalSortedHashMap);
+
+        values.entrySet().stream()
+                .sorted((k1, k2) -> -k1.getValue().compareTo(k2.getValue()))
+                .forEach(k -> sortedHashMap.put(k.getKey(), k.getValue()));
+
+
+        System.out.println(sortedHashMap);
         
-        return finalSortedHashMap;
+        return sortedHashMap;
     }
 }
 

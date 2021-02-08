@@ -1,23 +1,30 @@
 package me.bcof.canetop;
 
-import me.bcof.canetop.commands.caneAdminCommand;
-import me.bcof.canetop.commands.caneLeaderboardCommand;
-import me.bcof.canetop.events.blockBrokeEvent;
-import me.bcof.canetop.events.loginSession;
+import me.bcof.canetop.commands.CaneAdminCommand;
+import me.bcof.canetop.commands.CaneLeaderboardCommand;
+import me.bcof.canetop.events.MenuListener;
+import me.bcof.canetop.events.BlockBrokeEvent;
+import me.bcof.canetop.events.LoginSession;
+import me.bcof.canetop.menusystem.PlayerMenuUtility;
+import org.bukkit.entity.Player;
 import org.bukkit.plugin.java.JavaPlugin;
-import me.bcof.canetop.dataManager.configHandler;
+import me.bcof.canetop.dataManager.ConfigHandler;
+
+import java.util.HashMap;
 
 public final class CaneTop extends JavaPlugin {
-    private configHandler configManager;
+    private ConfigHandler configManager;
+    private static final HashMap<Player, PlayerMenuUtility> playerMenuMap = new HashMap<>();
 
     @Override
     public void onEnable() {
         // Plugin startup logic
-        getCommand("canetop").setExecutor(new caneLeaderboardCommand());
-        getCommand("cane").setExecutor(new caneAdminCommand());
+        getCommand("canetop").setExecutor(new CaneLeaderboardCommand());
+        getCommand("cane").setExecutor(new CaneAdminCommand());
 
-        getServer().getPluginManager().registerEvents(new loginSession(), this);
-        getServer().getPluginManager().registerEvents(new blockBrokeEvent(), this);
+        getServer().getPluginManager().registerEvents(new LoginSession(), this);
+        getServer().getPluginManager().registerEvents(new BlockBrokeEvent(), this);
+        getServer().getPluginManager().registerEvents(new MenuListener(), this);
         loadConfigHandler();
     }
 
@@ -27,10 +34,25 @@ public final class CaneTop extends JavaPlugin {
     }
 
     public void loadConfigHandler(){
-        configManager = new configHandler();
+        configManager = new ConfigHandler();
         configManager.setup();
         configManager.saveCaneConfig();
         configManager.reloadCaneConfig();
 
     }
+
+    public static PlayerMenuUtility getPlayerMenuUtility(Player player){
+        PlayerMenuUtility playerMenuUtility;
+        if(!(playerMenuMap.containsKey(player))){
+
+            playerMenuUtility = new PlayerMenuUtility(player);
+            playerMenuMap.put(player, playerMenuUtility);
+
+            return playerMenuUtility;
+        }else{
+            return playerMenuMap.get(player);
+        }
+    }
+
+
 }

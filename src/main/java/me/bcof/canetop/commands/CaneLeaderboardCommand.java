@@ -1,13 +1,13 @@
 package me.bcof.canetop.commands;
 
+import me.bcof.canetop.CaneTop;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
-import me.bcof.canetop.utils.stringUtil;
-import me.bcof.canetop.dataManager.caneDataController;
+import me.bcof.canetop.menusystem.menus.LeaderboardMenu;
 
-public class caneLeaderboardCommand implements CommandExecutor {
+public class CaneLeaderboardCommand implements CommandExecutor {
     /*
     /canetop opens up gui
     /cane reset <player>
@@ -18,9 +18,7 @@ public class caneLeaderboardCommand implements CommandExecutor {
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
         if(sender instanceof Player){
             Player player = (Player) sender;
-            caneDataController caneDataController = new caneDataController();
-            caneDataController.sortLeaderboard();
-            player.sendMessage("sent debug to console");
+            new LeaderboardMenu(CaneTop.getPlayerMenuUtility(player)).open();
         }
         return false;
     }

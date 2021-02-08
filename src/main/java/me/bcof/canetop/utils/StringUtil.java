@@ -2,7 +2,7 @@ package me.bcof.canetop.utils;
 
 import org.bukkit.ChatColor;
 
-public class stringUtil {
+public class StringUtil {
     private String message;
 
     public static String translateMessage(String message){

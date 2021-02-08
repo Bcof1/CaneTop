@@ -5,10 +5,10 @@ import org.bukkit.Material;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.block.BlockBreakEvent;
-import me.bcof.canetop.dataManager.caneDataController;
+import me.bcof.canetop.dataManager.CaneDataController;
 
-public class blockBrokeEvent implements Listener {
-    caneDataController caneDataController;
+public class BlockBrokeEvent implements Listener {
+    CaneDataController caneDataController;
 
     // adds up all of the mined sugarcane, even if only the bottom block is physically mined.
     @EventHandler
@@ -23,7 +23,7 @@ public class blockBrokeEvent implements Listener {
                 break;
             }
         }
-        caneDataController = new caneDataController();
+        caneDataController = new CaneDataController();
         caneDataController.setCaneAmount(event.getPlayer().getUniqueId(), caneDataController.getCaneAmount(event.getPlayer().getUniqueId()) + sugarcane);
     }
 }

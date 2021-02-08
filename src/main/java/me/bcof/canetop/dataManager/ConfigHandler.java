@@ -7,7 +7,7 @@ import org.bukkit.configuration.file.YamlConfiguration;
 import java.io.File;
 import java.io.IOException;
 
-public class configHandler {
+public class ConfigHandler {
     private static final CaneTop main = CaneTop.getPlugin(CaneTop.class);
     private static FileConfiguration caneConfig;
     private static File caneFile;
