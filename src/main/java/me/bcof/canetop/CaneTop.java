@@ -7,14 +7,17 @@ import me.bcof.canetop.events.MenuListener;
 import me.bcof.canetop.events.BlockBrokeEvent;
 import me.bcof.canetop.events.LoginSession;
 import me.bcof.canetop.menusystem.PlayerMenuUtility;
+import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.entity.Player;
 import org.bukkit.plugin.java.JavaPlugin;
 import me.bcof.canetop.dataManager.ConfigHandler;
 
+import java.io.File;
 import java.util.HashMap;
 
 public final class CaneTop extends JavaPlugin {
     private ConfigHandler configManager;
+
     private static final HashMap<Player, PlayerMenuUtility> playerMenuMap = new HashMap<>();
 
     @Override
@@ -26,7 +29,7 @@ public final class CaneTop extends JavaPlugin {
         getServer().getPluginManager().registerEvents(new LoginSession(), this);
         getServer().getPluginManager().registerEvents(new BlockBrokeEvent(), this);
         getServer().getPluginManager().registerEvents(new MenuListener(), this);
-        getServer().getPluginManager().registerEvents(new BlockPlaceEvent(), this);
+        getServer().getPluginManager().registerEvents(new BlockPlaceEvent(this), this);
         loadConfigHandler();
     }
 
@@ -35,23 +38,24 @@ public final class CaneTop extends JavaPlugin {
         // Plugin shutdown logic
     }
 
-    public void loadConfigHandler(){
+    public void loadConfigHandler() {
         configManager = new ConfigHandler();
         configManager.setup();
         configManager.saveCaneConfig();
         configManager.reloadCaneConfig();
-
+        getConfig().options().copyDefaults();
+        saveDefaultConfig();
     }
 
-    public static PlayerMenuUtility getPlayerMenuUtility(Player player){
+    public static PlayerMenuUtility getPlayerMenuUtility(Player player) {
         PlayerMenuUtility playerMenuUtility;
-        if(!(playerMenuMap.containsKey(player))){
+        if (!(playerMenuMap.containsKey(player))) {
 
             playerMenuUtility = new PlayerMenuUtility(player);
             playerMenuMap.put(player, playerMenuUtility);
 
             return playerMenuUtility;
-        }else{
+        } else {
             return playerMenuMap.get(player);
         }
     }
