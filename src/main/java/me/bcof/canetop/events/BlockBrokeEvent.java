@@ -3,6 +3,7 @@ package me.bcof.canetop.events;
 import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.event.EventHandler;
+import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
 import org.bukkit.event.block.BlockBreakEvent;
 import me.bcof.canetop.dataManager.CaneDataController;
@@ -10,8 +11,8 @@ import me.bcof.canetop.dataManager.CaneDataController;
 public class BlockBrokeEvent implements Listener {
     CaneDataController caneDataController;
 
-    // adds up all of the mined sugarcane, even if only the bottom block is physically mined.
-    @EventHandler
+    // adds up all of the mined sugarcane, takes into account how many are stacked on the block broken
+    @EventHandler (ignoreCancelled = true, priority = EventPriority.HIGH)
     public void onBlockBreak(BlockBreakEvent event){
         long sugarcane = 0;
 
