@@ -4,7 +4,6 @@ main: me.bcof.canetop.CaneTop
 api-version: 1.16
 authors: [ Bcof ]
 description: A cane counter for your server
-depend: [WorldGuard]
 commands:
   canetop:
     description: Shows you the leaderboard for everyone

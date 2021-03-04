@@ -22,18 +22,18 @@ public class CaneLeaderboardCommand implements CommandExecutor {
      */
     @Override
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
-        if(sender instanceof Player){
+        if (sender instanceof Player) {
             Player player = (Player) sender;
             new LeaderboardMenu(CaneTop.getPlayerMenuUtility(player)).open();
-        }else{
+        } else {
             CaneDataController caneDataController = new CaneDataController();
             HashMap<String, Long> values = caneDataController.sortLeaderboard();
             int count = 1;
             System.out.println("CANE TOP LEADERBOARD");
-            for (String value : values.keySet()){
-                if(count >= 10){
+            for (String value : values.keySet()) {
+                if (count >= 11) {
                     break;
-                }else{
+                } else {
                     OfflinePlayer player = Bukkit.getOfflinePlayer(UUID.fromString(value));
 
                     System.out.println(count + " - " + player.getName() + ": " + values.get(value));

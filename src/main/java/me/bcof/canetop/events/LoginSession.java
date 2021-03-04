@@ -11,12 +11,7 @@ public class LoginSession implements Listener {
     @EventHandler
     public void onPlayerJoin(PlayerJoinEvent event){
         CaneDataController caneDataController = new CaneDataController();
-        caneDataController.getData(event.getPlayer().getUniqueId());
+        caneDataController.getUser(event.getPlayer().getUniqueId());
     }
 
-    @EventHandler
-    public void onPlayerLeave(PlayerQuitEvent event){
-        // no clue if we need this yet
-
-    }
 }

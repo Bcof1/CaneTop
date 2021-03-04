@@ -23,18 +23,19 @@ public class CaneAdminCommand implements CommandExecutor {
 
             if(args.length == 0){
                 CaneDataController caneDataController = new CaneDataController();
-                player.sendMessage(StringUtil.translateMessage("&c&l" + "You" + "&7 have mined &a&l" + caneDataController.getCaneAmount(player.getUniqueId()) + " &7sugarcane"));
+                player.sendMessage(StringUtil.translateMessage("&c&lYou&7 have mined &a&l" + caneDataController.getCaneAmount(player.getUniqueId()) + " &7sugarcane"));
 
             }
             if(player.hasPermission("canetop.admin")){
+                String option = args[0];
+                String playerIGN = args[1];
+
                 if(args.length == 2) {
-                    String option = args[0];
-                    String playerIGN = args[1];
                     CaneDataController caneDataController = new CaneDataController();
 
                     if (option.equalsIgnoreCase("reset")) {
                         OfflinePlayer target = Bukkit.getOfflinePlayer(playerIGN);
-                        if (!caneDataController.doesUserExist(target.getUniqueId())) {
+                        if (caneDataController.doesUserExist(target.getUniqueId())) {
                             player.sendMessage(StringUtil.translateMessage("&c&lPlayer is not found"));
                         } else {
                             caneDataController.setCaneAmount(target.getUniqueId(), 0);
@@ -45,14 +46,12 @@ public class CaneAdminCommand implements CommandExecutor {
                 }
 
                 if(args.length == 3){
-                    String option = args[0];
-                    String playerIGN = args[1];
                     long amount = Long.parseLong(args[2]);
                     CaneDataController caneDataController = new CaneDataController();
 
                     if(option.equalsIgnoreCase("set")){
                         OfflinePlayer target = Bukkit.getOfflinePlayer(playerIGN);
-                        if (!caneDataController.doesUserExist(target.getUniqueId())) {
+                        if (caneDataController.doesUserExist(target.getUniqueId())) {
                             player.sendMessage(StringUtil.translateMessage("&c&lPlayer is not found"));
                         } else {
                             caneDataController.setCaneAmount(target.getUniqueId(), amount);
@@ -62,7 +61,6 @@ public class CaneAdminCommand implements CommandExecutor {
                 }
 
                 if(args.length == 1){
-                    String option = args[0];
                     if(option.equalsIgnoreCase("help")){
                         player.sendMessage(StringUtil.translateMessage("&c&l/canetop &7 - Opens up the canetop gui"));
                         player.sendMessage(StringUtil.translateMessage("&c&l/cane reset <player> &7 - Resets a player's cane counter"));
@@ -71,7 +69,7 @@ public class CaneAdminCommand implements CommandExecutor {
                     }else{
                         OfflinePlayer target = Bukkit.getOfflinePlayer(args[0]);
                         CaneDataController caneDataController = new CaneDataController();
-                        if (!caneDataController.doesUserExist(target.getUniqueId())) {
+                        if (caneDataController.doesUserExist(target.getUniqueId())) {
                             player.sendMessage(StringUtil.translateMessage("&c&lPlayer does not exist"));
                         } else {
                             player.sendMessage(StringUtil.translateMessage("&c&l" + target.getName() + "&7 has mined &a&l" + caneDataController.getCaneAmount(target.getUniqueId()) + " &7sugarcane"));

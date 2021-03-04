@@ -6,23 +6,21 @@ import org.bukkit.configuration.file.FileConfiguration;
 import java.util.*;
 
 public class CaneDataController {
-    private FileConfiguration file;
+    private FileConfiguration file = ConfigHandler.getCaneConfig();
     private ConfigHandler configHandler;
 
 
 
     public void createData(UUID uuid, long cane) {
-        file = configHandler.getCaneConfig();
         if (file.getConfigurationSection(uuid.toString()) == null) {
             file.createSection(uuid.toString());
             ConfigurationSection section = file.getConfigurationSection(uuid.toString());
             section.set("cane-number", cane);
-            configHandler.saveCaneConfig();
+            ConfigHandler.saveCaneConfig();
         }
     }
 
     public long getCaneAmount(UUID uuid) {
-        file = configHandler.getCaneConfig();
         if (file.getConfigurationSection(uuid.toString()) != null) {
             ConfigurationSection section = file.getConfigurationSection(uuid.toString());
             return section.getLong("cane-number");
@@ -32,38 +30,25 @@ public class CaneDataController {
 
 
     public void setCaneAmount(UUID uuid, long number) {
-        file = configHandler.getCaneConfig();
         if (file.getConfigurationSection(uuid.toString()) != null) {
             ConfigurationSection section = file.getConfigurationSection(uuid.toString());
             section.set("cane-number", number);
-            configHandler.saveCaneConfig();
-            configHandler.reloadCaneConfig();
+            ConfigHandler.saveCaneConfig();
+            ConfigHandler.reloadCaneConfig();
         }
     }
 
-    public void getData(UUID uuid){
-        file = configHandler.getCaneConfig();
-        if (file.getConfigurationSection(uuid.toString()) != null) {
-            ConfigurationSection section = file.getConfigurationSection(uuid.toString());
-            long amount = section.getLong("cane-number");
-
-            configHandler.saveCaneConfig();
-        }else{
+    public void getUser(UUID uuid){
+        if(file.getConfigurationSection(uuid.toString()) == null){
             createData(uuid, 0);
         }
     }
 
     public boolean doesUserExist(UUID uuid){
-        file = configHandler.getCaneConfig();
-        if(file.getConfigurationSection(uuid.toString()) == null){
-            return false;
-        }else{
-            return true;
-        }
+        return file.getConfigurationSection(uuid.toString()) == null;
     }
 
     public HashMap<String, Long> sortLeaderboard(){
-        file = configHandler.getCaneConfig();
         HashMap<String, Long> values = new HashMap<>();
 
         for (String player : file.getKeys(false)){
